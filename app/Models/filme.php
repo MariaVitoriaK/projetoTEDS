@@ -11,10 +11,15 @@ class filme extends Model
 
     protected $table = 'filmes';
 
-// Campos que podem ser preenchidos em massa
+    // Campos que podem ser preenchidos em massa
     protected $fillable = [
         'nome',
         'genero',
+        'diretor',
+        'ano',
         'created_by',
     ];
 }
+
+
+

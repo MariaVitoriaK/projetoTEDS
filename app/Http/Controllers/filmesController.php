@@ -31,8 +31,10 @@ class FilmesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nome'       => 'required|string|max:255',
-            'genero'  => 'nullable|string',
+            'nome' => 'required|string|max:255',
+            'genero' => 'nullable|string',
+            'diretor' => 'nullable|string',
+            'ano' => 'nullable|string',
         ]);
 
         $data['created_by'] = Auth::id();
@@ -69,10 +71,12 @@ class FilmesController extends Controller
     {
         $filme = Filme::findOrFail($id);
         $data = $request->validate([
-            'nome'      => 'required|string|max:255',
+            'nome' => 'required|string|max:255',
             'genero' => 'nullable|string',
+            'diretor' => 'nullable|string',
+            'ano' => 'nullable|string',
         ]);
-        
+
         if ($filme->created_by !== Auth::id()) {
             abort(403);
         }
@@ -90,7 +94,7 @@ class FilmesController extends Controller
     public function destroy(string $id)
     {
         $filme = Filme::findOrFail($id);
-        
+
         if ($filme->created_by !== Auth::id()) {
             abort(403);
         }

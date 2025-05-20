@@ -8,23 +8,22 @@
 
       <div>
         <label for="nome">Nome</label><br>
-        <input
-          type="text"
-          name="nome"
-          id="nome"
-          value="{{ old('nome', $filme->nome) }}"
-          required
-        >
+        <input type="text" name="nome" id="nome" value="{{ old('nome', $filme->nome) }}" required>
       </div>
 
       <div style="margin-top:1em;">
         <label for="genero">Gênero</label><br>
-        <input
-          type="text"
-          name="genero"
-          id="genero"
-          value= "{{ old('genero', $filme->genero) }}"
-        >
+        <input type="text" name="genero" id="genero" value="{{ old('genero', $filme->genero) }}">
+      </div>
+
+      <div style="margin-top:1em;">
+        <label for="diretor">Diretor</label><br>
+        <input type="text" name="diretor" id="diretor" value="{{ old('genero', $filme->diretor) }}">
+      </div>
+
+      <div style="margin-top:1em;">
+        <label for="ano">Ano</label><br>
+        <input type="text" name="ano" id="ano" value="{{ old('ano', $filme->ano) }}">
       </div>
 
       <div style="margin-top:1em;">
