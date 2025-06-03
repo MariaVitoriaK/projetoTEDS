@@ -18,7 +18,9 @@
                 <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
             </flux:navlist.group>
-            //
+
+
+
             <flux:navlist.group heading="Filmes" expandable :expanded="request()->routeIs('filmes.*')" class="mt-4">
 
                 <flux:navlist.item icon="list-bullet" :href="route('filmes.index')"
@@ -60,7 +62,11 @@
                 </flux:navlist.item>
 
             </flux:navlist.group>
-            //
+
+
+
+
+
         </flux:navlist>
 
         <flux:spacer />

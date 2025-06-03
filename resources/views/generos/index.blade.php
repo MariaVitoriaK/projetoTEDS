@@ -1,14 +1,21 @@
 <x-layouts.app :title="__('Generos')">
-    <div>
-        <div>
+
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    </head>
+    <div class="container">
+        <div class="header">
             <h1>Gênero</h1>
             <a href="{{ route('generos.create') }}">+ Novo Gênero</a>
         </div>
 
         @if($generos->isEmpty())
-            <p>Nenhum gênero cadastrado.</p>
+            <tr>
+                <td colspan="3" class="text-center">Nenhuma avaliação cadastrada.</td>
+            </tr>
         @else
-            <table border="1" cellpadding="8" cellspacing="0">
+
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -20,15 +27,16 @@
                         <tr>
                             <td>{{ $genero->nome }}</td>
                             <td>
-                                <a href="{{ route('generos.show', $genero) }}">Ver</a>
+                                <a href="{{ route('generos.show', $genero) }}" class="link blue">Ver</a>
                                 |
-                                <a href="{{ route('generos.edit', $genero) }}">Editar</a>
+                                <a href="{{ route('generos.edit', $genero) }}" class="link yellow">Editar</a>
                                 |
-                                <form action="{{ route('generos.destroy', $genero) }}" method="POST" style="display:inline"
+                                <form action="{{ route('generos.destroy', $genero) }}" method="POST" class="inline"
                                     onsubmit="return confirm('Tem certeza que deseja excluir este Gênero?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit">Excluir</button>
+                                    <button class="link red"
+                                        onclick="return confirm('Deseja excluir esta avaliação?')">Excluir</button>
                                 </form>
                             </td>
                         </tr>

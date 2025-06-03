@@ -12,11 +12,7 @@ class FilmesController extends Controller
 {
     public function index()
     {
-        // Usa eager loading para evitar N+1 queries
-        $filmes = Filme::with(['genero', 'diretor'])
-            ->where('created_by', auth()->id())
-            ->get();
-
+        $filmes = Filme::with(['genero', 'diretor'])->get();
         return view('filmes.index', compact('filmes'));
     }
 
@@ -24,7 +20,6 @@ class FilmesController extends Controller
     {
         $generos = Genero::all();
         $diretores = Diretor::all();
-
         return view('filmes.create', compact('generos', 'diretores'));
     }
 
@@ -32,8 +27,8 @@ class FilmesController extends Controller
     {
         $data = $request->validate([
             'nome' => 'required|string|max:255',
-            'genero' => 'required|exists:generos,id',  // valida o ID do gênero
-            'diretor' => 'required|exists:diretores,id', // valida o ID do diretor
+            'genero_id' => 'required|exists:generos,id',
+            'diretor_id' => 'required|exists:diretores,id',
             'ano' => 'nullable|string',
         ]);
 
@@ -65,14 +60,10 @@ class FilmesController extends Controller
     {
         $filme = Filme::findOrFail($id);
 
-        if ($filme->created_by !== Auth::id()) {
-            abort(403);
-        }
-
         $data = $request->validate([
             'nome' => 'required|string|max:255',
-            'genero' => 'required|exists:generos,id',
-            'diretor' => 'required|exists:diretores,id',
+            'genero_id' => 'required|exists:generos,id',
+            'diretor_id' => 'required|exists:diretores,id',
             'ano' => 'nullable|string',
         ]);
 
@@ -86,11 +77,6 @@ class FilmesController extends Controller
     public function destroy(string $id)
     {
         $filme = Filme::findOrFail($id);
-
-        if ($filme->created_by !== Auth::id()) {
-            abort(403);
-        }
-
         $filme->delete();
 
         return redirect()

@@ -11,6 +11,7 @@ return new class extends Migration {
         Schema::create('filmes', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 100);
+
             // FK para generos
             $table->unsignedBigInteger('genero_id');
             $table->foreign('genero_id')

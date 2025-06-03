@@ -1,14 +1,20 @@
 <x-layouts.app :title="__('Diretores')">
-    <div>
-        <div>
+
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    </head>
+    <div class="container">
+        <div class="header">
             <h1>Diretores</h1>
             <a href="{{ route('diretores.create') }}">+ Novo Diretor</a>
         </div>
 
         @if($diretores->isEmpty())
-            <p>Nenhum diretor cadastrado.</p>
+            <tr>
+                <td colspan="3" class="text-center">Nenhuma avaliação cadastrada.</td>
+            </tr>
         @else
-            <table border="1" cellpadding="8" cellspacing="0">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -22,15 +28,16 @@
                             <td>{{ $diretor->nome }}</td>
                             <td>{{ $diretor->nacionalidade}}</td>
                             <td>
-                                <a href="{{ route('diretores.show', $diretor) }}">Ver</a>
+                                <a href="{{ route('diretores.show', $diretor) }}" class="link blue">Ver</a>
                                 |
-                                <a href="{{ route('diretores.edit', $diretor) }}">Editar</a>
+                                <a href="{{ route('diretores.edit', $diretor) }}" class="link yellow">Editar</a>
                                 |
-                                <form action="{{ route('diretores.destroy', $diretor) }}" method="POST" style="display:inline"
+                                <form action="{{ route('diretores.destroy', $diretor) }}" method="POST" class="inline"
                                     onsubmit="return confirm('Tem certeza que deseja excluir este Diretor?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit">Excluir</button>
+                                    <button class="link red"
+                                        onclick="return confirm('Deseja excluir esta avaliação?')">Excluir</button>
                                 </form>
                             </td>
                         </tr>

@@ -1,16 +1,36 @@
 <x-layouts.app>
-  <div>
-    <h1>{{ $filme->nome }}</h1>
 
-    <h1>{{ $filme->genero  }}</h1>
+  <head>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  </head>
 
-    <h1>{{ $filme->diretor }}</h1>
+  <div class="container">
 
-    <h1>{{ $filme->ano  }}</h1>
+    <div class="card">
 
-    <div>
-      <a href="{{ route('filmes.create') }}">Novo filme</a>
-      <a href="{{ url()->previous() }}">Voltar</a>
+      <div class="card-section">
+        <h2>Nome:</h2>
+        <p>{{$filme->nome }}</p>
+      </div>
+
+      <div class="card-section">
+        <h2>Gênero:</h2>
+        <p>{{$filme->genero->nome ?? '—'}}</p>
+      </div>
+
+      <div class="card-section">
+        <h2>Diretor:</h2>
+        <p>{{$filme->diretor->nome ?? '—'}}</p>
+      </div>
+
+      <div class="card-section">
+        <h2>Ano:</h2>
+        <p>{{$filme->ano}}</p>
+      </div>
+
+      <div class="form-actions">
+        <a href="{{ route('filmes.edit', $filme) }}" class="btn yellow">Editar</a>
+        <a href="{{ route('filmes.index')  }}" class="btn gray">Voltar</a>
+      </div>
     </div>
-  </div>
 </x-layouts.app>
