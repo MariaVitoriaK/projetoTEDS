@@ -1,4 +1,5 @@
 <x-layouts.app>
+
   <div>
     <h1>Novo Filme</h1>
     {{-- <a href="{{ route('filmes.index') }}">Voltar</a> --}}
@@ -12,13 +13,27 @@
       </div>
 
       <div style="margin-top:1em;">
-        <label for="genero">genero</label><br>
-        <input type="text" name="genero" id="genero" value="{{ old('genero') }}" placeholder="Ex: Drama">
+        <label for="genero_id">Gênero</label><br>
+        <select name="genero" id="genero" required>
+          <option value="">Selecione o gênero</option>
+          @foreach($generos as $genero)
+        <option value="{{ $genero->id }}" {{ old('genero') == $genero->id ? 'selected' : '' }}>
+        {{ $genero->nome }}
+        </option>
+      @endforeach
+        </select>
       </div>
 
       <div style="margin-top:1em;">
         <label for="diretor">Diretor</label><br>
-        <input type="text" name="diretor" id="diretor" value="{{ old('diretor') }}" placeholder="Ex: Walter Salles">
+        <select name="diretor" id="diretort" required>
+          <option value="">Selecione o diretor</option>
+          @foreach($diretores as $diretor)
+        <option value="{{ $diretor->id }}" {{ old('diretor') == $diretor->id ? 'selected' : '' }}>
+        {{ $diretor->nome }}
+        </option>
+      @endforeach
+        </select>
       </div>
 
       <div style="margin-top:1em;">

@@ -22,8 +22,8 @@
       @foreach($filmes as $filme)
       <tr>
       <td>{{ $filme->nome }}</td>
-      <td>{{ $filme->genero}}</td>
-      <td>{{ $filme->diretor }}</td>
+      <td>{{ $filme->genero->nome ?? '—' }}</td>
+      <td>{{ $filme->diretor->nome ?? '—' }}</td>
       <td>{{ $filme->ano}}</td>
       <td>
       <a href="{{ route('filmes.show', $filme) }}">Ver</a>

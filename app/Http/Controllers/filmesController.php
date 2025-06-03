@@ -4,36 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\filme;
+use App\Models\Filme;
+use App\Models\Genero;
+use App\Models\Diretor;
 
 class FilmesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $filmes = Filme::where('created_by', auth()->id())->get();
+        // Usa eager loading para evitar N+1 queries
+        $filmes = Filme::with(['genero', 'diretor'])
+            ->where('created_by', auth()->id())
+            ->get();
+
         return view('filmes.index', compact('filmes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('filmes.create');
+        $generos = Genero::all();
+        $diretores = Diretor::all();
+
+        return view('filmes.create', compact('generos', 'diretores'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
             'nome' => 'required|string|max:255',
-            'genero' => 'nullable|string',
-            'diretor' => 'nullable|string',
+            'genero' => 'required|exists:generos,id',  // valida o ID do gênero
+            'diretor' => 'required|exists:diretores,id', // valida o ID do diretor
             'ano' => 'nullable|string',
         ]);
 
@@ -46,40 +46,35 @@ class FilmesController extends Controller
             ->with('success', 'Filme criado com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
-        $filme = Filme::findOrFail($id);
+        $filme = Filme::with(['genero', 'diretor'])->findOrFail($id);
         return view('filmes.show', ['filme' => $filme]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $filme = Filme::findOrFail($id);
-        return view('filmes.edit', compact('filme'));
+        $generos = Genero::all();
+        $diretores = Diretor::all();
+
+        return view('filmes.edit', compact('filme', 'generos', 'diretores'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $filme = Filme::findOrFail($id);
-        $data = $request->validate([
-            'nome' => 'required|string|max:255',
-            'genero' => 'nullable|string',
-            'diretor' => 'nullable|string',
-            'ano' => 'nullable|string',
-        ]);
 
         if ($filme->created_by !== Auth::id()) {
             abort(403);
         }
+
+        $data = $request->validate([
+            'nome' => 'required|string|max:255',
+            'genero' => 'required|exists:generos,id',
+            'diretor' => 'required|exists:diretores,id',
+            'ano' => 'nullable|string',
+        ]);
 
         $filme->update($data);
 
@@ -88,9 +83,6 @@ class FilmesController extends Controller
             ->with('success', 'Filme atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $filme = Filme::findOrFail($id);

@@ -19,6 +19,18 @@ class filme extends Model
         'ano',
         'created_by',
     ];
+
+    // Relacionamento com o modelo Genero
+    public function genero()
+    {
+        return $this->belongsTo(Genero::class, 'genero');
+    }
+
+    // Relacionamento com o modelo Diretor
+    public function diretor()
+    {
+        return $this->belongsTo(Diretor::class, 'diretor');
+    }
 }
 
 
