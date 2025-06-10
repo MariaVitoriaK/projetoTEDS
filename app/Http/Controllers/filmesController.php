@@ -83,4 +83,21 @@ class FilmesController extends Controller
             ->route('filmes.index')
             ->with('success', 'Filme excluído com sucesso!');
     }
+    ///////////////////////////////////////////////////////////////////////
+    public function toggleFavorito(Filme $filme)
+    {
+        $filme->is_favorito = !$filme->is_favorito;
+        $filme->save();
+
+        return back()->with('success', 'Status de favorito atualizado com sucesso!');
+    }
+    //////////////////////////////////////////////////////////////////////////
+
+
+    public function favoritos()
+    {
+        $filmesFavoritos = Filme::where('is_favorito', true)->with(relations: ['genero', 'diretor'])->get();
+        return view('favoritos.index', compact('filmesFavoritos'));
+    }
+
 }

@@ -26,6 +26,8 @@ return new class extends Migration {
 
             $table->string('ano');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->boolean('is_favorito')->default(false);
+
             $table->timestamps();
         });
     }

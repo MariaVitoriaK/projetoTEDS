@@ -42,7 +42,7 @@
 
       <div class="form-group">
         <label for="ano">Ano</label><br>
-        <input type="text" name="ano" id="ano" value="{{ old('ano') }}" placeholder="Ex: 2024">
+        <input type="text" name="ano" id="ano" value="{{ old('ano') }}" placeholder="Ex: 2024" required>
       </div>
 
       <div class="form-actions">

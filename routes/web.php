@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
+
 // Página inicial
 Route::get('/', function () {
     return view('welcome');
@@ -24,11 +25,20 @@ Route::get('/', function () {
 
 // Dashboard
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
+    ->middleware(middleware: ['auth', 'verified'])
     ->name('dashboard');
+
+
+Route::post('/filmes/{filme}/toggle-favorito', [FilmesController::class, 'toggleFavorito'])->name('filmes.toggleFavorito');
 
 Route::resource('filmes', FilmesController::class)
     ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+
+//
+Route::get('/favoritos', [FilmesController::class, 'favoritos'])->name('favoritos.index');
+
+
+//
 
 Route::resource('generos', generosController::class)->middleware('auth');
 

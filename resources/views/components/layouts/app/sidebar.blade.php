@@ -22,7 +22,6 @@
 
 
             <flux:navlist.group heading="Filmes" expandable :expanded="request()->routeIs('filmes.*')" class="mt-4">
-
                 <flux:navlist.item icon="list-bullet" :href="route('filmes.index')"
                     :current="request()->routeIs('filmes.index')" wire:navigate>
                     {{ __('Listar') }}
@@ -30,12 +29,12 @@
 
                 <flux:navlist.item icon="plus-circle" :href="route('filmes.create')"
                     :current="request()->routeIs('filmes.create')" wire:navigate>
-                    {{ __('Nova') }}
+                    {{ __('Criar') }}
                 </flux:navlist.item>
             </flux:navlist.group>
 
-            <flux:navlist.group heading="Generos" expandable :expanded="request()->routeIs('generos.*')" class="mt-4">
 
+            <flux:navlist.group heading="Generos" expandable :expanded="request()->routeIs('generos.*')" class="mt-4">
                 <flux:navlist.item icon="list-bullet" :href="route('generos.index')"
                     :current="request()->routeIs('generos.index')" wire:navigate>
                     {{ __('Listar') }}
@@ -45,12 +44,10 @@
                     :current="request()->routeIs('generos.create')" wire:navigate>
                     {{ __('Criar') }}
                 </flux:navlist.item>
-
             </flux:navlist.group>
 
             <flux:navlist.group heading="Diretores" expandable :expanded="request()->routeIs('diretores.*')"
                 class="mt-4">
-
                 <flux:navlist.item icon="list-bullet" :href="route('diretores.index')"
                     :current="request()->routeIs('diretores.index')" wire:navigate>
                     {{ __('Listar') }}
@@ -60,10 +57,13 @@
                     :current="request()->routeIs('diretores.create')" wire:navigate>
                     {{ __('Criar') }}
                 </flux:navlist.item>
-
             </flux:navlist.group>
 
 
+            <flux:navlist.item class="mt-4" icon="star" :href="route('favoritos.index')"
+                :current="request()->routeIs('favoritos.index')" wire:navigate>
+                {{ __('Favoritos') }}
+            </flux:navlist.item>
 
 
 
