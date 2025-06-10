@@ -46,13 +46,13 @@
       </td>
 
       <td>
-      <a href="{{ route('filmes.show', $filme) }}">Ver</a> |
-      <a href="{{ route('filmes.edit', $filme) }}">Editar</a> |
+      <a href="{{ route('filmes.show', $filme) }}" class="link blue">Ver</a> |
+      <a href="{{ route('filmes.edit', $filme) }}" class="link yellow">Editar</a> |
       <form action="{{ route('filmes.destroy', $filme) }}" method="POST" style="display:inline"
         onsubmit="return confirm('Tem certeza que deseja excluir este filme?')">
         @csrf
         @method('DELETE')
-        <button class="link red" onclick="return confirm('Deseja excluir esta avaliação?')">Excluir</button>
+        <button type="button" class="link red btn-excluir" data-nome="{{ $filme->nome }}">Excluir</button>
       </form>
       </td>
       </tr>

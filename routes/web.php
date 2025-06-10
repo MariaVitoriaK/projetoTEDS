@@ -34,11 +34,9 @@ Route::post('/filmes/{filme}/toggle-favorito', [FilmesController::class, 'toggle
 Route::resource('filmes', FilmesController::class)
     ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-//
+// Favoritos
 Route::get('/favoritos', [FilmesController::class, 'favoritos'])->name('favoritos.index');
 
-
-//
 
 Route::resource('generos', generosController::class)->middleware('auth');
 

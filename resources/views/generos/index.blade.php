@@ -35,8 +35,8 @@
                                     onsubmit="return confirm('Tem certeza que deseja excluir este Gênero?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="link red"
-                                        onclick="return confirm('Deseja excluir esta avaliação?')">Excluir</button>
+                                    <button type="button" class="link red btn-excluir"
+                                        data-nome="{{ $genero->nome }}">Excluir</button>
                                 </form>
                             </td>
                         </tr>
