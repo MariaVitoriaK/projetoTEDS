@@ -8,17 +8,21 @@ use App\Models\diretor;
 
 class diretoresController extends Controller
 {
+
+    // Exibe a lista de diretores do usuário autenticado.
     public function index()
     {
         $diretores = Diretor::where('created_by', auth()->id())->get();
         return view('diretores.index', compact('diretores'));
     }
 
+    // Exibe o formulário para criar um novo diretor.
     public function create()
     {
         return view('diretores.create');
     }
 
+    // Armazena um novo diretor no banco de dados.
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -35,18 +39,21 @@ class diretoresController extends Controller
             ->with('success', 'Diretor criado com sucesso!');
     }
 
+    // Exibe os detalhes de um diretor.
     public function show($id)
     {
         $diretor = Diretor::findOrFail($id);
         return view('diretores.show', ['diretor' => $diretor]);
     }
 
+    // Exibe o formulário para editar um diretor.
     public function edit(string $id)
     {
         $diretor = Diretor::findOrFail($id);
         return view('diretores.edit', compact('diretor'));
     }
 
+    // Atualiza os dados de um diretor.
     public function update(Request $request, string $id)
     {
         $diretor = Diretor::findOrFail($id);
@@ -66,6 +73,7 @@ class diretoresController extends Controller
             ->with('success', 'Diretor atualizado com sucesso!');
     }
 
+    // Remove um diretor do banco de dados.
     public function destroy(string $id)
     {
         $diretor = Diretor::findOrFail($id);

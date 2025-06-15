@@ -9,8 +9,10 @@ class diretor extends Model
 {
     use HasFactory;
 
+    // Nome da tabela
     protected $table = 'diretores';
 
+    // Define os campos que podem ser preenchidos em massa
     protected $fillable = [
         'nome',
         'nacionalidade',

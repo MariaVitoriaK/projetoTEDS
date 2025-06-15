@@ -12,9 +12,6 @@ return new class extends Migration {
             $table->id();
             $table->string('nome');
             $table->string('nacionalidade');
-            ///     $table->foreign('filmes_id')
-            ///       ->references('id')->on('filmes')
-            ///      ->onDelete('cascade');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

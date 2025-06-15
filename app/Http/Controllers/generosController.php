@@ -8,17 +8,22 @@ use App\Models\genero;
 
 class GenerosController extends Controller
 {
+
+    // Exibe a lista de gêneros criados pelo usuário autenticado.
     public function index()
     {
+        // Busca apenas gêneros criados pelo usuário autenticado
         $generos = Genero::where('created_by', auth()->id())->get();
         return view('generos.index', compact('generos'));
     }
 
+    // Exibe o formulário para criação de um novo gênero.
     public function create()
     {
         return view('generos.create');
     }
 
+    // Armazena um novo gênero no banco.
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -33,18 +38,22 @@ class GenerosController extends Controller
             ->route('generos.show', $genero)
             ->with('success', 'Gênero criado com sucesso!');
     }
+
+    // Exibe os detalhes de um gênero.
     public function show($id)
     {
         $genero = Genero::findOrFail($id);
         return view('generos.show', ['genero' => $genero]);
     }
 
+    //  Exibe o formulário para edição de um gênero.
     public function edit(string $id)
     {
         $genero = Genero::findOrFail($id);
         return view('generos.edit', compact('genero'));
     }
 
+    // Atualiza os dados de um gênero.
     public function update(Request $request, string $id)
     {
         $genero = Genero::findOrFail($id);
@@ -59,10 +68,11 @@ class GenerosController extends Controller
         $genero->update($data);
 
         return redirect()
-            ->route('generos.show', $genero)
+            ->route('generos.show', parameters: $genero)
             ->with('success', 'Gênero atualizado com sucesso!');
     }
 
+    // Remove um gênero do banco de dados.
     public function destroy(string $id)
     {
         $genero = Genero::findOrFail($id);
