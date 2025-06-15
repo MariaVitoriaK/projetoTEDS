@@ -14,7 +14,7 @@
 
     @if($filmes->isEmpty())
     <tr>
-      <td colspan="3" class="text-center">Nenhum filme cadastrada.</td>
+      <td colspan="3" class="text-center">Nenhum filme cadastrado.</td>
     </tr>
   @else
     <table class="table">

@@ -11,7 +11,7 @@
 
         @if($generos->isEmpty())
             <tr>
-                <td colspan="3" class="text-center">Nenhuma avaliação cadastrada.</td>
+                <td colspan="3" class="text-center">Nenhum gênero cadastrado.</td>
             </tr>
         @else
 

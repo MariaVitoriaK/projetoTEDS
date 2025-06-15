@@ -11,7 +11,7 @@
 
         @if($diretores->isEmpty())
             <tr>
-                <td colspan="3" class="text-center">Nenhuma avaliação cadastrada.</td>
+                <td colspan="3" class="text-center">Nenhum diretor cadastrado.</td>
             </tr>
         @else
             <table class="table">
